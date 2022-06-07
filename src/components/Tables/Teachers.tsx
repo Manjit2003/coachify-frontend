@@ -1,19 +1,17 @@
 import React from "react";
-import { useQuery } from "react-query";
-import { getTeachers } from "src/queries/Teachers";
-
-const people = [
-    {
-        name: "Lindsay Walton",
-        title: "Front-end Developer",
-        email: "lindsay.walton@example.com",
-        role: "Member",
-    },
-    // More people...
-];
+import { useMutation, useQuery } from "react-query";
+import { deleteTeacher, getTeachers } from "src/queries/Teachers";
+import Router, { useRouter } from "next/router";
 
 export const TeachersTable: React.FC = () => {
     const { data, isLoading, error } = useQuery("teacher", getTeachers);
+    const deleteMutation = useMutation(deleteTeacher, {
+        onSuccess: () => {
+            alert("Teacher deleted successfully");
+        },
+    });
+
+    const router = useRouter();
 
     return (
         <div className="sm:px-0 py-10">
@@ -29,6 +27,9 @@ export const TeachersTable: React.FC = () => {
                 <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
                     <button
                         type="button"
+                        onClick={() => {
+                            router.push("/teachers/add");
+                        }}
                         className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
                     >
                         Add teacher
@@ -120,13 +121,20 @@ export const TeachersTable: React.FC = () => {
                                                 <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
                                                     <a
                                                         href="#"
-                                                        className="text-indigo-600 hover:text-indigo-900"
+                                                        className="text-indigo-600 px-2 hover:text-indigo-900"
                                                     >
-                                                        Edit
-                                                        <span className="sr-only">
-                                                            , {teacher.email}
-                                                        </span>
+                                                        View
                                                     </a>
+                                                    <button
+                                                        onClick={() => {
+                                                            deleteMutation.mutate(
+                                                                teacher.id,
+                                                            );
+                                                        }}
+                                                        className="text-red-600 hover:text-red-900"
+                                                    >
+                                                        Delete
+                                                    </button>
                                                 </td>
                                             </tr>
                                         ))}

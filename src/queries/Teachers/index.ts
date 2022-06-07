@@ -9,3 +9,7 @@ export const getTeachers = async () => {
 export const postTeacher = async (teacher: Partial<Teacher>) => {
     return axiosClient.post<Teacher>("/teachers/", teacher);
 };
+
+export const deleteTeacher = async (id: string) => {
+    return axiosClient.delete(`/teachers/${id}`);
+};
