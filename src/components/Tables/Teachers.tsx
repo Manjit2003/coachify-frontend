@@ -1,4 +1,6 @@
 import React from "react";
+import { useQuery } from "react-query";
+import { getTeachers } from "src/queries/Teachers";
 
 const people = [
     {
@@ -11,6 +13,8 @@ const people = [
 ];
 
 export const TeachersTable: React.FC = () => {
+    const { data, isLoading, error } = useQuery("teacher", getTeachers);
+
     return (
         <div className="sm:px-0 py-10">
             <div className="sm:flex sm:items-center">
@@ -31,81 +35,108 @@ export const TeachersTable: React.FC = () => {
                     </button>
                 </div>
             </div>
-            <div className="mt-8 flex flex-col">
-                <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div className="inline-block min-w-full py-2 align-middle">
-                        <div className="overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5">
-                            <table className="min-w-full divide-y divide-gray-300">
-                                <thead className="bg-gray-50">
-                                    <tr>
-                                        <th
-                                            scope="col"
-                                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
-                                        >
-                                            Name
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                        >
-                                            Title
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                        >
-                                            Email
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                        >
-                                            Role
-                                        </th>
-                                        <th
-                                            scope="col"
-                                            className="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8"
-                                        >
-                                            <span className="sr-only">
-                                                Edit
-                                            </span>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-gray-200 bg-white">
-                                    {people.map((person) => (
-                                        <tr key={person.email}>
-                                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
-                                                {person.name}
-                                            </td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {person.title}
-                                            </td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {person.email}
-                                            </td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                {person.role}
-                                            </td>
-                                            <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                                                <a
-                                                    href="#"
-                                                    className="text-indigo-600 hover:text-indigo-900"
-                                                >
+
+            {isLoading ? (
+                <div className="mt-10">
+                    <div className="text-center">
+                        <div className="spinner" />
+                    </div>
+                </div>
+            ) : (
+                <div className="mt-8 flex flex-col">
+                    <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div className="inline-block min-w-full py-2 align-middle">
+                            <div className="overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5">
+                                <table className="min-w-full divide-y divide-gray-300">
+                                    <thead className="bg-gray-50">
+                                        <tr>
+                                            <th
+                                                scope="col"
+                                                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                                            >
+                                                First Name
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                                            >
+                                                Last Name
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                            >
+                                                Phone
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                            >
+                                                Email
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                            >
+                                                Gender
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                            >
+                                                Students Count
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                className="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8"
+                                            >
+                                                <span className="sr-only">
                                                     Edit
-                                                    <span className="sr-only">
-                                                        , {person.name}
-                                                    </span>
-                                                </a>
-                                            </td>
+                                                </span>
+                                            </th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-200 bg-white">
+                                        {data?.data.map((teacher) => (
+                                            <tr key={teacher.id}>
+                                                <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
+                                                    {teacher.firstname}
+                                                </td>
+                                                <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
+                                                    {teacher.lastname}
+                                                </td>
+                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    {teacher.phone}
+                                                </td>
+                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    {teacher.email}
+                                                </td>
+                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    {teacher.gender}
+                                                </td>
+                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    {teacher.students.length}
+                                                </td>
+                                                <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
+                                                    <a
+                                                        href="#"
+                                                        className="text-indigo-600 hover:text-indigo-900"
+                                                    >
+                                                        Edit
+                                                        <span className="sr-only">
+                                                            , {teacher.email}
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };
