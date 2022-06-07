@@ -39,7 +39,7 @@ const Home: React.FC = () => {
 
     return (
         <div>
-            <Layout title="Add new teacher">
+            <Layout title="Add new teacher" back>
                 <div className="mt-10 sm:mt-10">
                     <div className="">
                         <div className="mt-5 md:mt-0 md:col-span-2">

@@ -10,8 +10,10 @@ import {
     MenuAlt2Icon,
     UsersIcon,
     XIcon,
+    ArrowSmLeftIcon,
 } from "@heroicons/react/outline";
 import { SearchIcon } from "@heroicons/react/solid";
+import { useRouter } from "next/router";
 
 const navigation = [
     { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
@@ -33,8 +35,11 @@ function classNames(...classes: string[]) {
 
 export const Layout: React.FC<{
     title?: string;
+    back?: boolean;
 }> = (props) => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    const router = useRouter();
 
     return (
         <>
@@ -287,13 +292,27 @@ export const Layout: React.FC<{
 
                         <main className="flex-1">
                             <div className="py-6">
-                                {props.title && (
-                                    <div className="px-4 sm:px-6 md:px-0">
-                                        <h1 className="text-2xl font-semibold text-gray-900">
-                                            {props.title}
-                                        </h1>
-                                    </div>
-                                )}
+                                <div className="flex">
+                                    {props.back && (
+                                        <ArrowSmLeftIcon
+                                            className="h-8"
+                                            onClick={() => {
+                                                router.back();
+                                            }}
+                                        />
+                                    )}
+                                    {props.title && (
+                                        <div
+                                            className={`px-4 sm:px-6 md:px-0 ${
+                                                props.back && "ml-4"
+                                            }`}
+                                        >
+                                            <h1 className="text-2xl font-semibold text-gray-900">
+                                                {props.title}
+                                            </h1>
+                                        </div>
+                                    )}
+                                </div>
                                 <div className="px-4 sm:px-6 md:px-0">
                                     {props.children}
                                 </div>
