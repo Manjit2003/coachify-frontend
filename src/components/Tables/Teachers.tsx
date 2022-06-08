@@ -119,12 +119,16 @@ export const TeachersTable: React.FC = () => {
                                                     {teacher.students.length}
                                                 </td>
                                                 <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                                                    <a
-                                                        href="#"
-                                                        className="text-indigo-600 px-2 hover:text-indigo-900"
+                                                    <button
+                                                        onClick={() => {
+                                                            router.push(
+                                                                `/teachers/${teacher.id}`,
+                                                            );
+                                                        }}
+                                                        className="text-indigo-600 hover:text-indigo-900 mr-4"
                                                     >
                                                         View
-                                                    </a>
+                                                    </button>
                                                     <button
                                                         onClick={() => {
                                                             deleteMutation.mutate(

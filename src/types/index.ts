@@ -17,7 +17,7 @@ export interface Teacher {
     avatar: string;
 }
 
-interface Student {
+export interface Student {
     id: string;
     parent: Parent;
     firstname: string;
