@@ -19,7 +19,7 @@ export interface Teacher {
 
 export interface Student {
     id: string;
-    parent: Parent;
+    parent: Partial<Parent>;
     firstname: string;
     lastname: string;
     phone: string;

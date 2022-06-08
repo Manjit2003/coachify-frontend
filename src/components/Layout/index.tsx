@@ -19,7 +19,7 @@ const navigation = [
     { name: "Dashboard", href: "/", icon: HomeIcon, current: true },
     { name: "Teachers", href: "/teachers", icon: UsersIcon, current: false },
     { name: "Classes", href: "#", icon: UsersIcon, current: false },
-    { name: "Students", href: "#", icon: UsersIcon, current: false },
+    { name: "Students", href: "/students", icon: UsersIcon, current: false },
     { name: "Parents", href: "#", icon: UsersIcon, current: false },
 ];
 const userNavigation = [
