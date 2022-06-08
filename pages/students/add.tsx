@@ -1,10 +1,8 @@
 import React from "react";
 
 import { Layout } from "@components";
-import { StudentsTable } from "@components/Tables/Students";
 import { useFormik } from "formik";
 import { Student } from "src/types";
-import * as Yup from "yup";
 import { useMutation } from "react-query";
 import { postStudent } from "src/queries/Students";
 
@@ -21,14 +19,14 @@ const Home: React.FC = () => {
             lastname: "",
             email: "",
             address: "",
-            gender: "",
+            gender: "male",
             phone: "",
             parent: {
                 firstname: "",
                 lastname: "",
                 email: "",
                 address: "",
-                gender: "",
+                gender: "male",
                 phone: "",
             },
         },
@@ -157,10 +155,14 @@ const Home: React.FC = () => {
                                                             }
                                                             className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                                         >
-                                                            <option>
+                                                            <option
+                                                                value={"male"}
+                                                            >
                                                                 Male
                                                             </option>
-                                                            <option>
+                                                            <option
+                                                                value={"female"}
+                                                            >
                                                                 Female
                                                             </option>
                                                         </select>
@@ -317,10 +319,14 @@ const Home: React.FC = () => {
                                                             }
                                                             className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                                         >
-                                                            <option>
+                                                            <option
+                                                                value={"male"}
+                                                            >
                                                                 Male
                                                             </option>
-                                                            <option>
+                                                            <option
+                                                                value={"female"}
+                                                            >
                                                                 Female
                                                             </option>
                                                         </select>

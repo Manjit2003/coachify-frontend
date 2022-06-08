@@ -21,7 +21,7 @@ const Home: React.FC = () => {
             lastname: "",
             email: "",
             address: "",
-            gender: "",
+            gender: "female",
             phone: "",
         },
         onSubmit: (values) => {
@@ -149,10 +149,14 @@ const Home: React.FC = () => {
                                                             }
                                                             className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                                                         >
-                                                            <option>
+                                                            <option
+                                                                value={"male"}
+                                                            >
                                                                 Male
                                                             </option>
-                                                            <option>
+                                                            <option
+                                                                value={"female"}
+                                                            >
                                                                 Female
                                                             </option>
                                                         </select>
