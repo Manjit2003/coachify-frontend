@@ -4,7 +4,11 @@ import { deleteTeacher, getTeachers } from "src/queries/Teachers";
 import Router, { useRouter } from "next/router";
 
 export const TeachersTable: React.FC = () => {
-    const { data, isLoading, error } = useQuery("teacher", getTeachers);
+    const { data, isLoading, error } = useQuery(
+        "getListOfAllteacther",
+        getTeachers,
+    );
+
     const deleteMutation = useMutation(deleteTeacher, {
         onSuccess: () => {
             alert("Teacher deleted successfully");
