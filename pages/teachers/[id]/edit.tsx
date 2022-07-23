@@ -12,9 +12,9 @@ import { Teacher } from "src/types";
 import * as Yup from "yup";
 
 export const EditTeacherPage = () => {
-    const router = useRouter();
+    const router = useRouter(); // useRouter is used to change page & get query params
 
-    const mutation = useMutation(getSingleTeacher);
+    const getTeacherMutation = useMutation(getSingleTeacher);
 
     const editTeacherMutation = useMutation(putTeacher, {
         onSuccess: () => {
@@ -29,7 +29,7 @@ export const EditTeacherPage = () => {
 
         const { id } = router.query;
 
-        mutation.mutate(id as string, {
+        getTeacherMutation.mutate(id as string, {
             onSuccess: (data) => {
                 form.setValues(data.data);
             },
