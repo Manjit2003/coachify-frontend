@@ -51,19 +51,37 @@ export const TicTacToe = () => {
             ["a1", "b2", "c3"],
             ["a3", "b2", "c1"],
         ];
+
         for (let i = 0; i < winningCombinations.length; i++) {
             const [a, b, c] = winningCombinations[i];
+
             if (grid[a] !== "" && grid[a] === grid[b] && grid[a] === grid[c]) {
                 return grid[a];
             }
         }
+
         return "";
     };
 
     useEffect(() => {
         const winner = checkWinner();
+
         if (winner !== "") {
             alert(`${winner} is the winner!`);
+            reset();
+
+            return;
+        }
+
+        let filled = true;
+
+        Object.keys(grid).map((key) => {
+            if (grid[key] == "") {
+                filled = false;
+            }
+        });
+
+        if (filled) {
             reset();
         }
     }, [grid]);
